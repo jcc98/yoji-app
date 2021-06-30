@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import yoji5 from "./json/yojis5.json";
 import yoji4 from "./json/yojis4.json";
 import yoji3 from "./json/yojis3.json";
@@ -10,31 +10,37 @@ import "./ShowListYojis.css"
 
 function ShowListYojis() {
 
-    const [selectedYojiValue, setSelectedYoji] = useState()
+    const [selectedYojiValue, setSelectedYoji] = useState("")
     const [changeYojiValue, setChangeYojiValue] = useState(yoji5)
+    const [grade, setGrade] = useState(0)
 
-    switch (selectedYojiValue) {
-        case "5":
-            setChangeYojiValue(yoji5)
-            break;
-        case "4":
-            setChangeYojiValue(yoji4)
-            break;
-        case "3":
-            setChangeYojiValue(yoji3)
-            break;
-        case "jun2":
-            setChangeYojiValue(yojiJun2)
-            break;
-        case "2":
-            setChangeYojiValue(yoji2)
-            break;
-        case "jun1":
-            setChangeYojiValue(yojiJun1)
-            break;
-        case "1":
-            setChangeYojiValue(yoji1)
-    }
+    useEffect(() => {
+
+        switch (selectedYojiValue) {
+            case "5":
+                setChangeYojiValue(yoji5)
+                break;
+            case "4":
+                setChangeYojiValue(yoji4)
+                break;
+            case "3":
+                setChangeYojiValue(yoji3)
+                break;
+            case "jun2":
+                setChangeYojiValue(yojiJun2)
+                break;
+            case "2":
+                setChangeYojiValue(yoji2)
+                break;
+            case "jun1":
+                setChangeYojiValue(yojiJun1)
+                break;
+            case "1":
+                setChangeYojiValue(yoji1)
+                
+        }
+        
+    },[selectedYojiValue])
 
    return(
        <>
@@ -48,17 +54,18 @@ function ShowListYojis() {
 
             <div>
                 <h3>Show List</h3>
-                <ul className="ulStyle">
-                    {changeYojiValue.map((yoji, index) => <li key={index}>{yoji.word} <br></br> {yoji.def}</li>)}
-                </ul>
+                <h2>Grade: {changeYojiValue[0].grade}</h2>
             </div>
-       </>
-
+       
+        <ul className="ulStyle">
+        {changeYojiValue.map((yoji, index) => <li key={index}>{yoji.word} <br></br> {yoji.def}</li>)}
+        </ul>
+        
+     </>
    ) 
 
    function switchLevels(e) {
        setSelectedYoji(e.target.value)
-       console.log("a")
    }
 }
 
