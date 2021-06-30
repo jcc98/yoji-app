@@ -47,7 +47,7 @@ const Renderer = () => {
             
         }
 
-    })
+    },[level])
 
     const modifyStartState = () => {
         if (level === "" || difficulty === "") {
