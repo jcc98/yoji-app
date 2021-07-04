@@ -49,6 +49,14 @@ const Renderer = () => {
 
     },[level])
 
+    useEffect(() => {
+        if (difficulty === "oneChar") {
+            console.log("one")
+        } else {
+            console.log("two")
+        }
+    }, [startState])
+
     const modifyStartState = () => {
         if (level === "" || difficulty === "") {
             alert("You need to choose a level and a difficulty.")

@@ -8,12 +8,15 @@ const GenWord = (props) => {
     let modDef = props.level[rand].def.replace(props.level[rand].word[randLetter], "O")
 
     const [toggleYoji, setToggleYoji] = useState(false)
-    // const [toggleDef, setToggleDef] = useState(false)
 
+    useEffect(() => {
+      modYoji = props.level[rand].word
+      modDef = props.level[rand].def
+    },[])
 
     const toggleState = () => {
-      setToggleYoji(!setToggleYoji)
-      // setToggleDef(!setToggleDef)
+      setToggleYoji(!toggleYoji)
+      console.log(toggleYoji)
     }
 
     fetch(`https://kanjiapi.dev/v1/kanji/${props.level[rand].word[randLetter]}`)
