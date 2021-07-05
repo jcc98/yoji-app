@@ -17,6 +17,7 @@ const GenWord = (props) => {
     const toggleState = () => {
       setToggleYoji(!toggleYoji)
       console.log(toggleYoji)
+      console.log(props.letterFilter)
     }
 
     fetch(`https://kanjiapi.dev/v1/kanji/${props.level[rand].word[randLetter]}`)

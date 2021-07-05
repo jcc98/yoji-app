@@ -7,10 +7,12 @@ import yojiJun2 from "./json/yojisjun2.json";
 import yoji2 from "./json/yojis2.json";
 import yojiJun1 from "./json/yojisjun1.json";
 import yoji1 from "./json/yojis1.json";
+import yojiAll from "./json/yojiAll.json";
 import "./renderer.css";
 
 const Renderer = () => {
 
+    let lettersFiltered = 0
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
@@ -44,23 +46,25 @@ const Renderer = () => {
             case "yoji1":
                 setSwitchImportGrades(yoji1)
                 break;
+
+            case "all":
+                setSwitchImportGrades(yojiAll)
             
         }
 
     },[level])
 
-    useEffect(() => {
-        if (difficulty === "oneChar") {
-            console.log("one")
-        } else {
-            console.log("two")
-        }
-    }, [startState])
-
     const modifyStartState = () => {
         if (level === "" || difficulty === "") {
             alert("You need to choose a level and a difficulty.")
         } else {
+            if (difficulty === "oneChar") {
+                lettersFiltered = 1
+                console.log(lettersFiltered)
+            } else {
+                lettersFiltered = 2
+                console.log(lettersFiltered)
+            }
             setStartState(!startState)
             }
     }
@@ -96,7 +100,7 @@ const Renderer = () => {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && <GenWord level={switchImportGrades}/> }
+        { startState && <GenWord letterFilter ={lettersFiltered} level={switchImportGrades}/> }
 
     </>
     )
