@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Renderer from "./Renderer"
 
 const GenWord = (props) => {
 
@@ -30,9 +31,12 @@ const GenWord = (props) => {
     });
     })
 
+
     return(
     <div>
-
+            <Renderer.consumer>
+              <p>a</p>
+            </Renderer.consumer>
             <p>Grade level: {props.level[rand].grade}</p>
             <p>{props.level[rand].yomi}</p>
             <h1>{modYoji} </h1>

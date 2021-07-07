@@ -12,7 +12,7 @@ import "./renderer.css";
 
 const Renderer = () => {
 
-    let lettersFiltered = 0
+    const lettersFiltered = React.createContext(1)
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
@@ -59,11 +59,9 @@ const Renderer = () => {
             alert("You need to choose a level and a difficulty.")
         } else {
             if (difficulty === "oneChar") {
-                lettersFiltered = 1
-                console.log(lettersFiltered)
+                <lettersFiltered.Provider value={1}/>
             } else {
-                lettersFiltered = 2
-                console.log(lettersFiltered)
+                <lettersFiltered.Provider value={2}/>
             }
             setStartState(!startState)
             }
