@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Renderer from "./Renderer"
 
 const GenWord = (props) => {
 
-    let rand = Math.floor(Math.random() * Object.keys(props.level).length)
-    let randLetter = Math.floor(Math.random() * 3)
-    let modYoji = props.level[rand].word.replace(props.level[rand].word[randLetter], "O")
-    let modDef = props.level[rand].def.replace(props.level[rand].word[randLetter], "O")
+    let randomNumberArray = Math.floor(Math.random() * Object.keys(props.gradeLevel).length)
+    const hideRandomSingleLetter = Math.floor(Math.random() * 3)
+    let modifiedYoji = props.gradeLevel[randomNumberArray].word.replace(props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter], "O")
+    let modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter], "O")
 
-    const [toggleYoji, setToggleYoji] = useState(false)
+    // Show unfiltered answer when button clicked
 
     useEffect(() => {
-      modYoji = props.level[rand].word
-      modDef = props.level[rand].def
+      
     },[])
 
-    const toggleState = () => {
-      setToggleYoji(!toggleYoji)
-      console.log(toggleYoji)
-      console.log(props.letterFilter)
-    }
 
-    fetch(`https://kanjiapi.dev/v1/kanji/${props.level[rand].word[randLetter]}`)
+    fetch(`https://kanjiapi.dev/v1/kanji/${props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter]}`)
     .then(r => r.json())
     .then((data) => {
         fetch(`https://kanjiapi.dev/v1/reading/${data.on_readings[0]}`)
@@ -33,24 +26,20 @@ const GenWord = (props) => {
 
 
     return(
-    <div>
-            <Renderer.consumer>
-              <p>a</p>
-            </Renderer.consumer>
-            <p>Grade level: {props.level[rand].grade}</p>
-            <p>{props.level[rand].yomi}</p>
-            <h1>{modYoji} </h1>
-            <h3>{modDef}</h3>
-
-      <button onClick={(toggleState)}>
+      <div>
+            <p>Grade Level: {props.gradeLevel[randomNumberArray].grade}</p>
+            <p>{props.gradeLevel[randomNumberArray].yomi}</p>
+            <h1>{modifiedYoji} </h1>
+            <h3>{modifiedDefinition}</h3>
+      <button>
        Show Answer
       </button>
 
       <button onClick={() => {
-        //   setNext(rand = Math.floor(Math.random() * Object.keys(props.level).length))
+        //   setNext(rand = Math.floor(Math.random() * Object.keys(props.gradeLevel).length))
         //   setNext(          randLetter = Math.floor(Math.random() * 3))
-        //   setNext(modYoji = props.level[rand].word.replace(props.level[rand].word[randLetter], "O"))
-        //   setNext(modDef = props.level[rand].def.replace(props.level[rand].word[randLetter], "O"))
+        //   setNext(modYoji = props.gradeLevel[rand].word.replace(props.gradeLevel[rand].word[randLetter], "O"))
+        //   setNext(modDef = props.gradeLevel[rand].def.replace(props.gradeLevel[rand].word[randLetter], "O"))
 
       }}>New Word</button>
 

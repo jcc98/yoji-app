@@ -12,7 +12,6 @@ import "./renderer.css";
 
 const Renderer = () => {
 
-    const lettersFiltered = React.createContext(1)
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
@@ -58,11 +57,6 @@ const Renderer = () => {
         if (level === "" || difficulty === "") {
             alert("You need to choose a level and a difficulty.")
         } else {
-            if (difficulty === "oneChar") {
-                <lettersFiltered.Provider value={1}/>
-            } else {
-                <lettersFiltered.Provider value={2}/>
-            }
             setStartState(!startState)
             }
     }
@@ -98,7 +92,7 @@ const Renderer = () => {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && <GenWord letterFilter ={lettersFiltered} level={switchImportGrades}/> }
+        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades}/> }
 
     </>
     )
