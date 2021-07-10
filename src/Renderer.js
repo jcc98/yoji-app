@@ -12,10 +12,21 @@ import "./renderer.css";
 
 const Renderer = () => {
 
+    
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
     const [switchImportGrades, setSwitchImportGrades] = useState(yoji5)
+
+    const randomNumberArray = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+    let hideRandomSingleLetter = Math.floor(Math.random() * 3)
+    // let hideTwoRandomLetters = Math.floor(Math.random() * 2 + 1)
+    let generatedYoji = switchImportGrades[randomNumberArray].word
+    let modifiedYoji = generatedYoji.replace(generatedYoji[hideRandomSingleLetter], "O")
+    let modifiedDefinition = switchImportGrades[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O")
+
+    const [renderNewYoji, setRenderNewYoji] = useState()
+  
 
     useEffect(() => {
         switch (level) {
@@ -92,7 +103,7 @@ const Renderer = () => {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades}/> }
+        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} modifiedYoji={modifiedYoji} modifiedDefinition={modifiedDefinition} generatedYoji={generatedYoji}/> }
 
     </>
     )

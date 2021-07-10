@@ -2,46 +2,58 @@ import React, { useEffect, useState } from "react";
 
 const GenWord = (props) => {
 
-    let randomNumberArray = Math.floor(Math.random() * Object.keys(props.gradeLevel).length)
-    const hideRandomSingleLetter = Math.floor(Math.random() * 3)
-    let modifiedYoji = props.gradeLevel[randomNumberArray].word.replace(props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter], "O")
-    let modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter], "O")
+  // let randomNumberArray = Math.floor(Math.random() * Object.keys(props.gradeLevel).length)
+  // let hideRandomSingleLetter = Math.floor(Math.random() * 3)
+  // let hideTwoRandomLetters = Math.floor(Math.random() * 2 + 1)
+  // let generatedYoji = props.gradeLevel[randomNumberArray].word
+  // let modifiedYoji = generatedYoji.replace(generatedYoji[hideRandomSingleLetter], "O")
+  // let modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O")
 
     // Show unfiltered answer when button clicked
+    // if (hideTwoRandomLetters === 1) {
+    //   modifiedYoji = generatedYoji.replace(generatedYoji[0], "O")
+    //   modifiedYoji = generatedYoji.replace(generatedYoji[1], "O")
+    // } else if (hideTwoRandomLetters === 2) {
+    //   modifiedYoji = generatedYoji.replace(generatedYoji[2], "O")
+    //   modifiedYoji = generatedYoji.replace(generatedYoji[3], "O")
+    // }
 
-    useEffect(() => {
-      
-    },[])
+    // fetch(`https://kanjiapi.dev/v1/kanji/${generatedYoji[hideRandomSingleLetter]}`)
+    // .then(r => r.json())
+    // .then((data) => {
+    //     fetch(`https://kanjiapi.dev/v1/reading/${data.on_readings[0]}`)
+    //         .then(r => r.json())
+    //         .then((data) => {
+    //         console.log(data)
+    // });
+    // })
 
+    const [showAnswer, setShowAnswer] = useState(props.modifiedYoji)
+    const [newWord, setNewWord] = useState()
 
-    fetch(`https://kanjiapi.dev/v1/kanji/${props.gradeLevel[randomNumberArray].word[hideRandomSingleLetter]}`)
-    .then(r => r.json())
-    .then((data) => {
-        fetch(`https://kanjiapi.dev/v1/reading/${data.on_readings[0]}`)
-            .then(r => r.json())
-            .then((data) => {
-            console.log(data)
-    });
-    })
 
 
     return(
       <div>
-            <p>Grade Level: {props.gradeLevel[randomNumberArray].grade}</p>
-            <p>{props.gradeLevel[randomNumberArray].yomi}</p>
-            <h1>{modifiedYoji} </h1>
-            <h3>{modifiedDefinition}</h3>
-      <button>
+            <p>Grade Level: {props.gradeLevel[props.randomNumberArray].grade}</p>
+            <p>{props.gradeLevel[props.randomNumberArray].yomi}</p>
+            <h1>{showAnswer} </h1>
+            <h3>{props.modifiedDefinition}</h3>
+      <button onClick={() => {
+        // setNext(modifiedYoji = generatedYoji)
+        // modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O")
+        setShowAnswer(props.generatedYoji)
+      }}>
        Show Answer
       </button>
 
-      <button onClick={() => {
-        //   setNext(rand = Math.floor(Math.random() * Object.keys(props.gradeLevel).length))
-        //   setNext(          randLetter = Math.floor(Math.random() * 3))
-        //   setNext(modYoji = props.gradeLevel[rand].word.replace(props.gradeLevel[rand].word[randLetter], "O"))
-        //   setNext(modDef = props.gradeLevel[rand].def.replace(props.gradeLevel[rand].word[randLetter], "O"))
+      <button> 
+          {/* // setNext(randomNumberArray = Math.floor(Math.random() * Object.keys(props.gradeLevel).length))
+          // setNext(          hideRandomSingleLetter = Math.floor(Math.random() * 3))
+          // setNext(modifiedYoji = props.gradeLevel[hideRandomSingleLetter].word.replace(props.gradeLevel[hideRandomSingleLetter].word[hideRandomSingleLetter], "O"))
+          // setNext(modifiedDefinition = props.gradeLevel[hideRandomSingleLetter].def.replace(props.gradeLevel[hideRandomSingleLetter].word[hideRandomSingleLetter], "O")) */}
 
-      }}>New Word</button>
+      New Word</button>
 
     </div>
 
