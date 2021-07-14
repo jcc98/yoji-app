@@ -9,15 +9,6 @@ const GenWord = (props) => {
   // let modifiedYoji = generatedYoji.replace(generatedYoji[hideRandomSingleLetter], "O")
   // let modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O")
 
-    // Show unfiltered answer when button clicked
-    // if (hideTwoRandomLetters === 1) {
-    //   modifiedYoji = generatedYoji.replace(generatedYoji[0], "O")
-    //   modifiedYoji = generatedYoji.replace(generatedYoji[1], "O")
-    // } else if (hideTwoRandomLetters === 2) {
-    //   modifiedYoji = generatedYoji.replace(generatedYoji[2], "O")
-    //   modifiedYoji = generatedYoji.replace(generatedYoji[3], "O")
-    // }
-
     // fetch(`https://kanjiapi.dev/v1/kanji/${generatedYoji[hideRandomSingleLetter]}`)
     // .then(r => r.json())
     // .then((data) => {
@@ -28,26 +19,24 @@ const GenWord = (props) => {
     // });
     // })
 
-    const [showAnswer, setShowAnswer] = useState(props.modifiedYoji)
-    const [newWord, setNewWord] = useState()
-
-
+    // const [showAnswer, setShowAnswer] = useState(props.modifiedYoji)
 
     return(
       <div>
             <p>Grade Level: {props.gradeLevel[props.randomNumberArray].grade}</p>
             <p>{props.gradeLevel[props.randomNumberArray].yomi}</p>
-            <h1>{showAnswer} </h1>
-            <h3>{props.modifiedDefinition}</h3>
+            {/* <h1>{showAnswer} </h1> */}
+            <h1>{props.gradeLevel[props.randomNumberArray].word}</h1>
+            <h3>{props.gradeLevel[props.randomNumberArray].def}</h3>
       <button onClick={() => {
         // setNext(modifiedYoji = generatedYoji)
         // modifiedDefinition = props.gradeLevel[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O")
-        setShowAnswer(props.generatedYoji)
+        // setShowAnswer(props.generatedYoji)
       }}>
        Show Answer
       </button>
 
-      <button> 
+      <button onClick={props.onChange}> 
           {/* // setNext(randomNumberArray = Math.floor(Math.random() * Object.keys(props.gradeLevel).length))
           // setNext(          hideRandomSingleLetter = Math.floor(Math.random() * 3))
           // setNext(modifiedYoji = props.gradeLevel[hideRandomSingleLetter].word.replace(props.gradeLevel[hideRandomSingleLetter].word[hideRandomSingleLetter], "O"))

@@ -17,7 +17,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
     <Router>
       <NavBar />
       <Switch>
-        <Route path="/kanjigame" component={KanjiGame, Renderer} />
+        <Route exact path="/" component={KanjiGame} />
+        <Route path="/kanjigame" component={Renderer} />
         <Route path="/search" component={Search} />
         <Route path="/list" component={ShowListYojis} />
         <Route path="/about" component={About} />
