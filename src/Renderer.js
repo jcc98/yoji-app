@@ -12,35 +12,25 @@ import "./renderer.css";
 
 const Renderer = () => {
 
-    
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
     const [switchImportGrades, setSwitchImportGrades] = useState(yoji5)
-
-    const [randomNumberArray, setRandomNumberArray] = useState(Math.floor(Math.random() * Object.keys(switchImportGrades).length))
-    const [hideRandomSingleLetter, setRandomSingleLetter] = useState(Math.floor(Math.random() * 3))
-    const [generatedYoji, setGeneratedYoji] = useState(switchImportGrades[randomNumberArray].word)
-    const [modifiedYoji, setModifiedYoji] = useState(generatedYoji.replace(generatedYoji[hideRandomSingleLetter], "O"))
-    const [modifiedDefinition, setModifiedDefinition] = useState(switchImportGrades[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O"))
+    const genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+    const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
     const [modifyState, setModifyState] = useState(false)
+    const filteredWord = switchImportGrades[randomNumberArray].word.replace(switchImportGrades[randomNumberArray].word[Math.floor(Math.random() * 4)], "O")
 
     useEffect(() => {
-        setRandomNumberArray(Math.floor(Math.random() * Object.keys(switchImportGrades).length))
-        setRandomSingleLetter(Math.floor(Math.random() * 3))
-        setGeneratedYoji(switchImportGrades[randomNumberArray].word)
-        setModifiedYoji(modifiedYoji => generatedYoji.replace(generatedYoji[hideRandomSingleLetter], "O"))
-        setModifiedDefinition(switchImportGrades[randomNumberArray].def.replace(generatedYoji[hideRandomSingleLetter], "O"))
-
+        setRandomNumberArray(genRandWord)
+        console.log(randomNumberArray)
+        console.log(switchImportGrades.length)
     },[modifyState])
 
     const changeVal = () => {
         setModifyState(!modifyState)
-        
-
+        console.log(modifyState)
     }
-    
-    // let hideTwoRandomLetters = Math.floor(Math.random() * 2 + 1)
   
     useEffect(() => {
         switch (level) {
@@ -73,6 +63,8 @@ const Renderer = () => {
 
             case "all":
                 setSwitchImportGrades(yojiAll)
+            
+            genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
             
         }
 
@@ -117,7 +109,7 @@ const Renderer = () => {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} modifiedYoji={modifiedYoji} modifiedDefinition={modifiedDefinition} generatedYoji={generatedYoji} onChange={changeVal}/>}
+        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={filteredWord}/>}
 
     </>
     )
