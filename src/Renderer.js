@@ -19,18 +19,23 @@ const Renderer = () => {
     const genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
     const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
     const [modifyState, setModifyState] = useState(false)
-    const filteredWord = switchImportGrades[randomNumberArray].word.replace(switchImportGrades[randomNumberArray].word[Math.floor(Math.random() * 4)], "O")
+    let word = switchImportGrades[randomNumberArray].word
 
     useEffect(() => {
         setRandomNumberArray(genRandWord)
-        console.log(randomNumberArray)
-        console.log(switchImportGrades.length)
     },[modifyState])
 
     const changeVal = () => {
         setModifyState(!modifyState)
-        console.log(modifyState)
     }
+
+    const oneChar = (word) => {
+        word = word.replace(word[Math.floor(Math.random() * 4)], "O")
+    }
+
+    // const twoChar = () => {
+
+    // }
   
     useEffect(() => {
         switch (level) {
@@ -75,6 +80,21 @@ const Renderer = () => {
             alert("You need to choose a level and a difficulty.")
         } else {
             setStartState(!startState)
+                if (difficulty === "oneChar") {
+                    window.word = word.replace(word[Math.floor(Math.random() * 4)], "O")
+                } else {
+                   
+                    const frontBack = Math.floor(Math.random () * 2)
+                    console.log(frontBack)
+                    if (frontBack === 0) {
+                        // Filter word 2 chars
+                        // window.word = word.replace(word[0], "O")
+                        // window.word = word.replace(word[1], "O")
+                    } else {
+                        // window.word = word.replace(word[2], "O")
+                        // window.word = word.replace(word[3], "O")
+                    }
+                }
             }
     }
 
@@ -109,7 +129,7 @@ const Renderer = () => {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={filteredWord}/>}
+        { startState && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={window.word}/>}
 
     </>
     )
