@@ -16,13 +16,13 @@ const Renderer = () => {
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
     const [switchImportGrades, setSwitchImportGrades] = useState(yoji5)
-    const genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+    let genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
     const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
     const [modifyState, setModifyState] = useState(false)
     let word = switchImportGrades[randomNumberArray].word
     
         if (difficulty === "oneChar") {
-            word = word.replace(word[0], "O")
+            word = word.replace(word[Math.floor(Math.random() * 4)], "O")
         } else {
             const frontOrBack = Math.floor(Math.random() * 2)
             if (frontOrBack === 0 ) {
@@ -46,36 +46,49 @@ const Renderer = () => {
         switch (level) {
             case "yoji5":
                 setSwitchImportGrades(yoji5)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             case "yoji4":
                 setSwitchImportGrades(yoji4)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             
             case "yoji3":
                 setSwitchImportGrades(yoji3)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             
             case "yojiJun2":
                 setSwitchImportGrades(yojiJun2)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             
             case "yoji2":
                 setSwitchImportGrades(yoji2)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             
             case "yojiJun1":
                 setSwitchImportGrades(yojiJun1)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
             
             case "yoji1":
                 setSwitchImportGrades(yoji1)
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+
                 break;
 
             case "all":
-                setSwitchImportGrades(yojiAll)
-            
-            genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
-            
+                setSwitchImportGrades(yojiAll)    
+                genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
+        
         }
 
     },[level])
