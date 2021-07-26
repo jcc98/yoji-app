@@ -4,6 +4,7 @@ import NavBar from "./NavBar"
 import About from "./About"
 import KanjiGame from "./KanjiGame"
 import Search from "./Search"
+import Score from "./Score"
 import ShowListYojis from "./ShowListYojis"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 

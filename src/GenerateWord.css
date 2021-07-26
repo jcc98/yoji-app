@@ -1,0 +1,13 @@
+.correct {
+    background-color: rgb(23, 170, 23);
+}
+
+.wrong {
+    background-color: rgb(161, 22, 22);
+}
+
+.correct, .wrong {
+    color: #fff;
+    margin: 10px;
+    height: 50px;
+}

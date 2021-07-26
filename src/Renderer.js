@@ -11,7 +11,6 @@ import yojiAll from "./json/yojiAll.json";
 import "./renderer.css";
 
 const Renderer = () => {
-
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
