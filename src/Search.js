@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import yojiAll from "./json/yojiAll.json";
-import { array } from "prop-types";
+import "./Search.css"
+import SimpleModal from "./Modal"
+
+
 
 function Search() {
     const [searchWord, setSearchWord] = useState("")
-
 
     return(
         <>
@@ -20,9 +22,12 @@ function Search() {
             })
             .map((val, key) => {
                 return (
-                    <div key={key}>
-                        <h1>{val.word}</h1>
-                    </div>
+                    <>
+                        <div key={key}>
+                            {<SimpleModal word={val.word} yomi={val.yomi} grade={val.grade} def={val.def}/>}
+                        </div>
+
+                    </>
                 )
             })}            
         </>
