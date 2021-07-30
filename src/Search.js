@@ -14,7 +14,7 @@ function Search() {
             <p>Search by kanji (not kana)</p>
             <input type="text" placeholder="Search for yoji..." onChange={e => {setSearchWord(e.target.value)}}></input>
             {yojiAll.filter((word) => {
-                if (searchWord == "") {
+                if (searchWord === "") {
                     return ""
                 } else if (word.word.includes(searchWord)) {
                     return word

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./GenerateWord.css"
+import EndGame from "./EndGame.js"
 
 const GenWord = (props) => {
 
@@ -22,6 +23,8 @@ const GenWord = (props) => {
     const [toggle, setToggle] = useState(true)
 
     const [score, setScore] = useState(0)
+
+    const [endToggle, setEndToggle] = useState(true)
   
 
     const onNewWordClick = () => {
@@ -49,18 +52,24 @@ const GenWord = (props) => {
 
     return(
       <div>
-        <p>Grade Level: {props.gradeLevel[props.randomNumberArray].grade}</p>
-        <p>Score: {score}</p>
-        <p>{props.gradeLevel[props.randomNumberArray].yomi}</p>
-        <h1>{toggle ? props.filteredWord : word}</h1>
-        <h3>{props.gradeLevel[props.randomNumberArray].def}</h3>
+        { endToggle &&
+          <div>
+            <p>Grade Level: {props.gradeLevel[props.randomNumberArray].grade}</p>
+            <p>Score: {score}</p>
+            <p>{props.gradeLevel[props.randomNumberArray].yomi}</p>
+            <h1>{toggle ? props.filteredWord : word}</h1>
+            <h3 className="word-definition">{props.gradeLevel[props.randomNumberArray].def}</h3>
 
-        <button onClick={() => setToggle(!toggle)}>Toggle Answer</button>
-        <br></br>
-        {!toggle && <button ref={btnRefCorrect} className="correct" onClick={inc}>Correct</button>
+            <button onClick={() => setToggle(!toggle)}>Toggle Answer</button>
+            
+            {endToggle && <button onClick={() => setEndToggle(!endToggle)}>End</button>}
+            <br></br>
+            {!toggle && <button ref={btnRefCorrect} className="correct" onClick={inc}>Correct</button>
+            }
+            {!toggle && <button ref={btnRefWrong} className="wrong" onClick={dec}>Wrong</button>}
+          </div>
         }
-        {!toggle && <button ref={btnRefWrong} className="wrong" onClick={dec}>Wrong</button>}
-        <br></br>{!toggle && <button>End</button>}
+        {!endToggle && <EndGame score={score} wrongAnswers={wrongAnswers} correctAnswers={correctAnswers}/>}
       </div>
 
 );

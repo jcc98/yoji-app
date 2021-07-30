@@ -1,0 +1,21 @@
+.word:hover {
+    color: #000;
+    cursor: pointer;
+    transition: all 1s ease-out;
+}
+
+.modal-reading {
+    font-size: 1.5em;
+}
+
+.modal-definition {
+    font-size: 1.35em;
+    font-weight: light;
+    line-height: 1.7em;
+    padding: 1em;
+    letter-spacing: .1em;
+}
+
+#simple-modal-title {
+    margin-top: 30px;
+}

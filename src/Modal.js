@@ -1,23 +1,25 @@
 import React from "react"
 import { Modal } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import "./Modal.css"
 
 
 function getModalStyle() {
-    const top = 50
-    const left = 50
 
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%`,
-    };
+    const top = 25;
+    const left = 25;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
     }
+}
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        position: "absolute",
-        width: 400,
+    position: "absolute",
+    width: 400,
         backgroundColor: theme.palette.background.paper,
         border: "2px solid #000",
         boxShadow: theme.shadows[5],
@@ -42,8 +44,8 @@ export default function SimpleModal({word, def, grade, yomi}) {
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <h2 id="simple-modal-title">{word}</h2>
-            <h1>Grade: {grade} <br></br>Reading: {yomi}</h1>
-            <p id="simple-modal-description">
+            <h1 className="modal-reading">Grade: {grade} <br></br>Reading: {yomi}</h1>
+            <p id="simple-modal-description" className="modal-definition">
                 {def}
             </p>
             <SimpleModal />
@@ -52,15 +54,13 @@ export default function SimpleModal({word, def, grade, yomi}) {
 
     return (
         <div>
-            <h3 onClick={handleOpen}>{word}</h3>
-            {/* <button type="button" onClick={handleOpen}>
-                Check more info
-            </button> */}
+            <h3 className="word" onClick={handleOpen}>{word}</h3>
             <Modal 
             open={open}
             onClose={handleClose}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
+            
             >
                 {body}
             </Modal>

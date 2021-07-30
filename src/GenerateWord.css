@@ -6,6 +6,18 @@
     background-color: rgb(161, 22, 22);
 }
 
+.word-definition {
+    font-size: 2em;
+    margin: 0 auto;
+    padding: 1em 2em;
+}
+
+@media screen and (max-width: 600px) {
+    .word-definition {
+        font-size: 1.5em;
+    }
+}
+
 .correct, .wrong {
     color: #fff;
     margin: 10px;
