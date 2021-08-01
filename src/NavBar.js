@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import logo from "./img/logo.png";
 
 function NavBar() {
 
@@ -10,7 +11,7 @@ function NavBar() {
     return(
         <nav>
             <Link to="/">
-                <h3>Logo</h3>
+                <img className="logo-image" src={logo}></img>
             </Link>
             <ul className="nav-links">
                 <Link style={navStyle} to="/kanjigame">

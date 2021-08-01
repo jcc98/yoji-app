@@ -5,7 +5,7 @@ function EndGame({correctAnswers, wrongAnswers, score}) {
  
     return(
         <>
-            <h2>{score}</h2>
+            <h2>Score: {score}</h2>
             <h3>Correct Answers:</h3>
             {correctAnswers.map((val, key) => {
             return <div key={key}><p>{val}</p></div>
