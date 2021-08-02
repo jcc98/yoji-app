@@ -9,6 +9,9 @@
 
 .container:hover {
     color: #fff;
+    background-color: grey;
+    border: rgb(231, 231, 231);
+    cursor: pointer;
 }
 
 h2 {

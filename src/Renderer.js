@@ -8,7 +8,7 @@ import yoji2 from "./json/yojis2.json";
 import yojiJun1 from "./json/yojisjun1.json";
 import yoji1 from "./json/yojis1.json";
 import yojiAll from "./json/yojiAll.json";
-import "./renderer.css";
+import "./hide-component.css"
 
 const Renderer = () => {
     const [startState, setStartState] = useState(false)
