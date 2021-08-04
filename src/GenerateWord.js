@@ -2,21 +2,13 @@ import React, { useState, useRef } from "react";
 import "./GenerateWord.css"
 import EndGame from "./EndGame.js"
 
-const GenWord = (props) => {
+const GenWord = ({hiddenLetter, gradeLevel, randomNumberArray, onChange, filteredWord}) => {
 
-    // fetch(`https://kanjiapi.dev/v1/kanji/${generatedYoji[hideRandomSingleLetter]}`)
-    // .then(r => r.json())
-    // .then((data) => {
-    //     fetch(`https://kanjiapi.dev/v1/reading/${data.on_readings[0]}`)
-    //         .then(r => r.json())
-    //         .then((data) => {
-    //         console.log(data)
-    // });
-    // })
+
     const [correctAnswers, setCorrectAnswers] = useState([])
     const [wrongAnswers, setWrongAnswers] = useState([])
 
-    let word = props.gradeLevel[props.randomNumberArray].word
+    let word = gradeLevel[randomNumberArray].word
     let btnRefCorrect = useRef()
     let btnRefWrong = useRef()
 
@@ -28,7 +20,7 @@ const GenWord = (props) => {
   
 
     const onNewWordClick = () => {
-      props.onChange()
+      onChange()
       setToggle(true)
     }
     
@@ -54,11 +46,11 @@ const GenWord = (props) => {
       <div>
         { endToggle &&
           <div>
-            <p>Grade Level: {props.gradeLevel[props.randomNumberArray].grade}</p>
+            <p>Grade Level: {gradeLevel[randomNumberArray].grade}</p>
             <p>Score: {score}</p>
-            <p>{props.gradeLevel[props.randomNumberArray].yomi}</p>
-            <h1>{toggle ? props.filteredWord : word}</h1>
-            <h3 className="word-definition">{props.gradeLevel[props.randomNumberArray].def}</h3>
+            <p>{gradeLevel[randomNumberArray].yomi}</p>
+            <h1>{toggle ? filteredWord : word}</h1>
+            <h3 className="word-definition">{gradeLevel[randomNumberArray].def}</h3>
 
             <button onClick={() => setToggle(!toggle)}>Toggle Answer</button>
             
