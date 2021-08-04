@@ -1,0 +1,27 @@
+.possible-answers {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(219, 218, 218);
+    width: 10%;
+    padding: .5em;
+    margin: .4em auto;
+    border-radius: 20%;
+    transition: .5s all;
+    user-select: none;
+
+}
+
+.possible-answers:hover {
+    cursor: pointer;
+    color: #B3B47F;
+    background-color: rgb(39, 39, 39);
+}
+
+.possible-answers:active {
+    color: rgb(219, 218, 218);
+    transform: translate(0, 5px);
+}
+
+h1 {
+    font-size: 1.8em;
+}

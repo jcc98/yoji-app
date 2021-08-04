@@ -5,6 +5,11 @@
         /* user-select: none; */
 }
 
+*::selection {
+    background-color:rgb(94, 95, 58);
+    color: rgb(231, 231, 231);
+}
+
 nav {
     display: flex;
     justify-content: space-around;

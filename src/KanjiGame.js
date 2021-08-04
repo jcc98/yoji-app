@@ -26,9 +26,11 @@ function KanjiGame() {
     const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
     const [modifyState, setModifyState] = useState(false)
     let word = switchImportGrades[randomNumberArray].word
+    let unfilteredWord = switchImportGrades[randomNumberArray].word
+    const singleLetterRandom = Math.floor(Math.random() * 4)
     
         if (difficulty === "oneChar") {
-            word = word.replace(word[Math.floor(Math.random() * 4)], "O")
+            word = word.replace(word[singleLetterRandom], "O")
         } else {
             const frontOrBack = Math.floor(Math.random() * 2)
             if (frontOrBack === 0 ) {
@@ -144,7 +146,7 @@ function KanjiGame() {
             <button onClick={modifyStartState}>Start</button>
         </div>
         { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
-        { startState && mode == 2 && <MultipleChoice hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
+        { startState && mode == 2 && <MultipleChoice hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
         </>
         
     )
