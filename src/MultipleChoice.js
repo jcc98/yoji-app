@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./MultipleChoice.css"
 
 
@@ -6,6 +6,7 @@ import "./MultipleChoice.css"
 function MultipleChoice({hiddenLetter, nonFilteredWord, gradeLevel, randomNumberArray, onChange, filteredWord, filteredLetter}) {
 
     const [randomReadings, setRandomReadings] = useState([nonFilteredWord[filteredLetter]])
+    const [renderArray, setRenderArray] = useState()
     let score = 0
 
 
@@ -19,7 +20,9 @@ function MultipleChoice({hiddenLetter, nonFilteredWord, gradeLevel, randomNumber
                 if (randomReadings.length < 4) {
                     let word = data.main_kanji[Math.floor(Math.random() * data.main_kanji.length)]
                     setRandomReadings(oldArray => [...oldArray, word])
+
                 }
+
 
     });
     })
