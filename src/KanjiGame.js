@@ -18,6 +18,11 @@ import yojiAll from "./json/yojiAll.json";
 function KanjiGame() {
     const [mode, setMode] = useState()
     // new 
+    const renderComponent = () => {
+        setRandomNumberArray(genRandWord)
+        setUnfilteredWord(switchImportGrades[randomNumberArray].word)
+    }
+    const [render, setRender] = useState(false)
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
@@ -26,8 +31,9 @@ function KanjiGame() {
     const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
     const [modifyState, setModifyState] = useState(false)
     let word = switchImportGrades[randomNumberArray].word
-    let unfilteredWord = switchImportGrades[randomNumberArray].word
-    const singleLetterRandom = Math.floor(Math.random() * 4)
+   // let unfilteredWord = switchImportGrades[randomNumberArray].word
+    const [unfilteredWord, setUnfilteredWord] = useState(switchImportGrades[randomNumberArray].word)
+    const [singleLetterRandom, setSingleLetterRandom] = useState(Math.floor(Math.random() * 4))
     
         if (difficulty === "oneChar") {
             word = word.replace(word[singleLetterRandom], "O")
@@ -146,7 +152,7 @@ function KanjiGame() {
             <button onClick={modifyStartState}>Start</button>
         </div>
         { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
-        { startState && mode == 2 && <MultipleChoice hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
+        { startState && mode == 2 && <MultipleChoice renderComponent={renderComponent} hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
         </>
         
     )

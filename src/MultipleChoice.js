@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react"
 import "./MultipleChoice.css"
 import "./hide-component.css"
+import KanjiGame from "./KanjiGame"
 
 
 
-function MultipleChoice({hiddenLetter, nonFilteredWord, gradeLevel, randomNumberArray, onChange, filteredWord, filteredLetter}) {
+function MultipleChoice({renderComponent, hiddenLetter, nonFilteredWord, gradeLevel, randomNumberArray, onChange, filteredWord, filteredLetter}) {
 
     const [randomReadings, setRandomReadings] = useState([nonFilteredWord[filteredLetter]])
-    const [renderArray, setRenderArray] = useState()
-    let score = 0
+    const [render, setRender] = useState(0)
 
     const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -36,17 +36,26 @@ function MultipleChoice({hiddenLetter, nonFilteredWord, gradeLevel, randomNumber
     });
     })
 
+    const verifyAnswer = (answer) => {
+        if (answer === nonFilteredWord[filteredLetter]) {
+            renderComponent()
+            setRender(render + 1)
+            
+        } else {
+        }
+    }
+
     return (
         <>            
         <p>Grade Level: {gradeLevel[randomNumberArray].grade}</p>
-        <p>Score: {score}</p>
+        <p>Score: </p>
         <p>{gradeLevel[randomNumberArray].yomi}</p>
             <h3>{filteredWord}</h3>
                 <div className="hideComponent">
                     {nbArray = randomReadings}
                     {shuffle(nbArray)}
                 </div>
-                {randomReadings.map((kanji) => <h1 className="possible-answers">{kanji}</h1>)}
+                {randomReadings.map((kanji) => <h1 className="possible-answers" onClick={(e) => verifyAnswer(e.target.innerText)}>{kanji}</h1>)}
         </>
     );
 }
