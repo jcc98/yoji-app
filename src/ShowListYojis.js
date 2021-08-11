@@ -58,7 +58,7 @@ function ShowListYojis() {
             </div>
        
         <ul className="ulStyle">
-        {changeYojiValue.map((yoji, index) => <li key={index}>{yoji.word} <br></br> {yoji.def}</li>)}
+        {changeYojiValue.map((yoji, index) => <li key={index}><h3>{yoji.yomi}</h3><h2>{yoji.word}</h2>  <p>{yoji.def}</p><hr></hr></li>)}
         </ul>
         
      </>

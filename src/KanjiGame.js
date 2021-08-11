@@ -20,7 +20,10 @@ function KanjiGame() {
     // new 
     const renderComponent = () => {
         setRandomNumberArray(genRandWord)
+        
         setUnfilteredWord(switchImportGrades[randomNumberArray].word)
+        setSingleLetterRandom(Math.floor(Math.random() * 4))
+    
     }
     const [render, setRender] = useState(false)
     const [startState, setStartState] = useState(false)
@@ -35,6 +38,23 @@ function KanjiGame() {
     const [unfilteredWord, setUnfilteredWord] = useState(switchImportGrades[randomNumberArray].word)
     const [singleLetterRandom, setSingleLetterRandom] = useState(Math.floor(Math.random() * 4))
     
+    const [randomReadings, setRandomReadings] = useState([unfilteredWord[singleLetterRandom]])
+
+    fetch(`https://kanjiapi.dev/v1/kanji/${unfilteredWord[singleLetterRandom]}`)
+    .then(r => r.json())
+    .then((data) => {
+        fetch(`https://kanjiapi.dev/v1/reading/${data.on_readings[0]}`)
+            .then(r => r.json())
+            .then((data) => {
+                
+                if (randomReadings.length < 4) {
+                    let word = data.main_kanji[Math.floor(Math.random() * data.main_kanji.length)]
+                    setRandomReadings(oldArray => [...oldArray, word])
+                }            
+    });
+    })
+
+
         if (difficulty === "oneChar") {
             word = word.replace(word[singleLetterRandom], "O")
         } else {
@@ -109,7 +129,9 @@ function KanjiGame() {
 
     const modifyStartState = () => {
         if (level === "" || difficulty === "") {
+            if (mode !== 0 || mode !== 1) {
             alert("You need to choose a level and a difficulty.")
+            }
         } else {
             setStartState(!startState)
                 }
@@ -152,7 +174,7 @@ function KanjiGame() {
             <button onClick={modifyStartState}>Start</button>
         </div>
         { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
-        { startState && mode == 2 && <MultipleChoice renderComponent={renderComponent} hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
+        { startState && mode == 2 && <MultipleChoice renderComponent={renderComponent} randomReadings={randomReadings} hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
         </>
         
     )

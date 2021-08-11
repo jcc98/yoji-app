@@ -1,3 +1,26 @@
 .ulStyle {
     color: #fff;
+    list-style-type: none;
+    padding: 1em;
+    margin: 1.5em;
+}
+
+.ulStyle h3 {
+    font-size: 1em;
+    color: white;
+}
+
+.ulStyle p {
+    font-size: 1.3em;
+    line-height: 1.5em;
+    margin: 1.5em 2em;
+}
+
+.ulStyle hr {
+    margin: 0 10em;
+}
+
+.ulStyle li, ul {
+    background: rgb(2,0,36);
+    background-color: rgb(141, 132, 98);
 }
