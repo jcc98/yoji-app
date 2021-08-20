@@ -7,40 +7,66 @@ import yoji2 from "./json/yojis2.json";
 import yojiJun1 from "./json/yojisjun1.json";
 import yoji1 from "./json/yojis1.json";
 import "./ShowListYojis.css"
+import Spinner from 'react-bootstrap/Spinner'
 
 function ShowListYojis() {
 
     const [selectedYojiValue, setSelectedYoji] = useState("")
     const [changeYojiValue, setChangeYojiValue] = useState(yoji5)
     const [grade, setGrade] = useState(0)
+    const [yojiWords, setYojiWords] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    const yojiFunction = async () => {
+        try {
+                setYojiWords(changeYojiValue)
+            setLoading(true)
+            
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        yojiFunction()
+    }, [changeYojiValue])
 
     useEffect(() => {
 
         switch (selectedYojiValue) {
+            
             case "5":
                 setChangeYojiValue(yoji5)
+                setLoading(false)
                 break;
             case "4":
                 setChangeYojiValue(yoji4)
+                setLoading(false)
                 break;
             case "3":
                 setChangeYojiValue(yoji3)
+                setLoading(false)
                 break;
             case "jun2":
                 setChangeYojiValue(yojiJun2)
+                setLoading(false)
                 break;
             case "2":
                 setChangeYojiValue(yoji2)
+                setLoading(false)
                 break;
             case "jun1":
                 setChangeYojiValue(yojiJun1)
+                setLoading(false)
                 break;
             case "1":
                 setChangeYojiValue(yoji1)
+                setLoading(false)
                 
         }
         
     },[selectedYojiValue])
+
 
    return(
        <>
@@ -58,7 +84,7 @@ function ShowListYojis() {
             </div>
        
         <ul className="ulStyle">
-        {changeYojiValue.map((yoji, index) => <li key={index}><h3>{yoji.yomi}</h3><h2>{yoji.word}</h2>  <p>{yoji.def}</p><hr></hr></li>)}
+        {loading ? yojiWords.map((yoji, index) => <li key={index}><h3>{yoji.yomi}</h3><h2>{yoji.word}</h2>  <p>{yoji.def}</p><hr></hr></li>) : <Spinner animation="grow" />}
         </ul>
         
      </>
