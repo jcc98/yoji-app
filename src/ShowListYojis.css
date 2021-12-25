@@ -20,7 +20,12 @@
     margin: 0 10em;
 }
 
-.ulStyle li, ul {
-    background: rgb(2,0,36);
-    background-color: rgb(141, 132, 98);
+ ul li {
+    padding: 1.3rem;
+    border-radius: 1rem;
+}
+
+ul li:hover {
+    transform: scale(0.95);
+    transition: 0.2s all;
 }

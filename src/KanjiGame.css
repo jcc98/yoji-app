@@ -1,19 +1,24 @@
 .container {
     display: flex;
     flex-direction: column;
-    border: 1px solid grey;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    -webkit-box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.35); 
+    box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.15);
     padding: 10px;
     margin-bottom: 2em;
-
+    background-color: #fff!important;
 }
 
-.container:hover, .selected {
-    color: #fff;
+
+.container-bg:hover, .selected {
     background-color: grey;
     border: rgb(231, 231, 231);
     cursor: pointer;
 }
-
+.flex {
+    height: 100vh;
+}
 
 
 h2 {

@@ -140,14 +140,14 @@ function KanjiGame() {
             
             }
     return(
-        <>
+        <div className="container container-gradient">
             <div className={startState && "hideComponent"}>
                 <h3>Kanji Game</h3>
-                <div className="container" onClick={() => setMode(1)}>
+                <div className="container container-bg" onClick={() => setMode(1)}>
                     <h2>Self-assessment mode</h2>
                     <p>Judge by yourself whether you got it right or not.</p>
                 </div>
-                <div className="container" onClick={() => setMode(2)}>
+                <div className="container container-bg" onClick={() => setMode(2)}>
                     <h2>Multiple-choice mode</h2>
                     <p>Select the correct reading for the designated yoji.</p>
                 </div>
@@ -177,7 +177,7 @@ function KanjiGame() {
         </div>
         { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
         { startState && mode === 2 && <MultipleChoice renderComponent={renderComponent} randomReadings={randomReadings} hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
-        </>
+        </div>
         
     )
 }

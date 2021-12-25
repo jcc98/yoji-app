@@ -14,9 +14,6 @@ function NavBar() {
                 <img className="logo-image" src={logo}></img>
             </Link>
             <ul className="nav-links">
-                <Link style={navStyle} to="/kanjigame">
-                <li>Kanji Game</li>
-                </Link>
                 <Link style={navStyle} to="/search">
                 <li>Search</li>
                 </Link>
