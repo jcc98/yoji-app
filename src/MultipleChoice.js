@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./MultipleChoice.css"
 import "./hide-component.css"
-import KanjiGame from "./KanjiGame"
-
-
 
 function MultipleChoice({randomReadings, renderComponent, hiddenLetter, nonFilteredWord, gradeLevel, randomNumberArray, onChange, filteredWord, filteredLetter}) {
 

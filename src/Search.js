@@ -19,6 +19,7 @@ function Search() {
                 } else if (word.word.includes(searchWord)) {
                     return word
                 }
+                return null
             })
             .map((val, key) => {
                 return (

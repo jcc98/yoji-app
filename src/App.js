@@ -6,10 +6,10 @@ import Search from "./Search"
 import ShowListYojis from "./ShowListYojis"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+
+
+
   function App() {
-
-
-    // use "exact" on Router to show homepage (Route path "/" only) 
     
 
   return(

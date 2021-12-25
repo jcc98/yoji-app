@@ -13,21 +13,21 @@ function ShowListYojis() {
 
     const [selectedYojiValue, setSelectedYoji] = useState("")
     const [changeYojiValue, setChangeYojiValue] = useState(yoji5)
-    const [grade, setGrade] = useState(0)
     const [yojiWords, setYojiWords] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const yojiFunction = async () => {
-        try {
-                setYojiWords(changeYojiValue)
-            setLoading(true)
-            
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
     useEffect(() => {
+        const yojiFunction = async () => {
+            try {
+                    setYojiWords(changeYojiValue)
+                setLoading(true)
+                
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    
         yojiFunction()
     }, [changeYojiValue])
 
@@ -62,6 +62,9 @@ function ShowListYojis() {
             case "1":
                 setChangeYojiValue(yoji1)
                 setLoading(false)
+                break;
+            default:
+                return null
                 
         }
         
