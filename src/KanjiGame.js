@@ -17,22 +17,29 @@ import yojiAll from "./json/yojiAll.json";
 function KanjiGame() {
     const [mode, setMode] = useState()
     // new 
-    const renderComponent = () => {
-        setRandomNumberArray(genRandWord)
-        
-        setUnfilteredWord(switchImportGrades[randomNumberArray].word)
+    const renderComponent = (e) => {
+        setRandomNumberArray(randomArrayNb)
+        setUnfilteredWord(yojiLevel[randomNumberArray].word)
         setSingleLetterRandom(Math.floor(Math.random() * 4))
     
     }
     const [startState, setStartState] = useState(false)
     const [level, setLevel] = useState("yoji5")
     const [difficulty, setDifficulty] = useState("oneChar")
-    const [switchImportGrades, setSwitchImportGrades] = useState(yoji5)
-    let genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades).length)
-    const [randomNumberArray, setRandomNumberArray] = useState(genRandWord)
+    const [yojiLevel, setYojiLevel] = useState(yoji5)
+    let randomArrayNb = Math.floor(Math.random() * Object.keys(yojiLevel).length)
+    const [randomNumberArray, setRandomNumberArray] = useState(randomArrayNb)
     const [modifyState, setModifyState] = useState(false)
-    let word = switchImportGrades[randomNumberArray].word
-    const [unfilteredWord, setUnfilteredWord] = useState(switchImportGrades[randomNumberArray].word)
+    let word
+    try {
+        
+        word = yojiLevel[randomNumberArray].word
+
+    } catch(err) {
+        console.log(yojiLevel.length)
+        console.log(randomNumberArray)
+    }
+    const [unfilteredWord, setUnfilteredWord] = useState(yojiLevel[randomNumberArray].word)
     const [singleLetterRandom, setSingleLetterRandom] = useState(Math.floor(Math.random() * 4))
     const [randomReadings, setRandomReadings] = useState([unfilteredWord[singleLetterRandom]])
 
@@ -65,65 +72,69 @@ function KanjiGame() {
         }
 
     useEffect(() => {
-        setRandomNumberArray(genRandWord)
+        setRandomNumberArray(randomArrayNb)
     },[modifyState])
+
+    useEffect(() => {
+
+    },[level])
 
     const changeVal = () => {
         setModifyState(!modifyState)
     }
-    const updateGenRandWord = () => genRandWord = Math.floor(Math.random() * Object.keys(switchImportGrades.length)) 
+    const updateNumberArray = () => randomArrayNb = Math.floor(Math.random() * Object.keys(yojiLevel.length)) 
 
   
     useEffect(() => {
         switch (level) {
             case "yoji5":
-                setSwitchImportGrades(yoji5)
-                updateGenRandWord()
+                setYojiLevel(yoji5)
+                updateNumberArray()
 
                 break;
             case "yoji4":
-                setSwitchImportGrades(yoji4)
-                updateGenRandWord()
+                setYojiLevel(yoji4)
+                updateNumberArray()
 
                 break;
             
             case "yoji3":
-                setSwitchImportGrades(yoji3)
-                updateGenRandWord()
+                setYojiLevel(yoji3)
+                updateNumberArray()
 
                 break;
             
             case "yojiJun2":
-                setSwitchImportGrades(yojiJun2)
-                updateGenRandWord()
+                setYojiLevel(yojiJun2)
+                updateNumberArray()
 
                 break;
             
             case "yoji2":
-                setSwitchImportGrades(yoji2)
-                updateGenRandWord()
+                setYojiLevel(yoji2)
+                updateNumberArray()
 
                 break;
             
             case "yojiJun1":
-                setSwitchImportGrades(yojiJun1)
-                updateGenRandWord()
+                setYojiLevel(yojiJun1)
+                updateNumberArray()
 
                 break;
             
             case "yoji1":
-                setSwitchImportGrades(yoji1)
-                updateGenRandWord()
+                setYojiLevel(yoji1)
+                updateNumberArray()
 
                 break;
 
             case "all":
-                setSwitchImportGrades(yojiAll)    
-                updateGenRandWord()
+                setYojiLevel(yojiAll)    
+                updateNumberArray()
                 break;
             default:
-                setSwitchImportGrades(yoji5)
-                updateGenRandWord()
+                setYojiLevel(yoji5)
+                updateNumberArray()
         
         }
 
@@ -156,7 +167,7 @@ function KanjiGame() {
             {/* new */}
             <div className={startState && "hideComponent"}>
             <label for="level">Choose level</label>
-            <select name="level" id="level" onChange={(e) => setLevel(e.target.value)}>
+            <select name="level" id="level" onChange={(e) => setLevel(e)}>
                 <option value ="yoji5">５級</option>
                 <option value ="yoji4">４級</option>
                 <option value ="yoji3">３級</option>
@@ -175,8 +186,8 @@ function KanjiGame() {
             <br></br>
             <button onClick={modifyStartState}>Start</button>
         </div>
-        { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
-        { startState && mode === 2 && <MultipleChoice renderComponent={renderComponent} randomReadings={randomReadings} hiddenLetter={difficulty} gradeLevel={switchImportGrades} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
+        { startState && mode === 1 && <GenWord hiddenLetter={difficulty} gradeLevel={yojiLevel} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word}/>}
+        { startState && mode === 2 && <MultipleChoice renderComponent={renderComponent} randomReadings={randomReadings} hiddenLetter={difficulty} gradeLevel={yojiLevel} randomNumberArray={randomNumberArray} onChange={changeVal} filteredWord={word} nonFilteredWord={unfilteredWord} filteredLetter={singleLetterRandom}/>}
         </div>
         
     )
